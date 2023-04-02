@@ -2,7 +2,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UltimateQATest extends PageSetUp {
 
@@ -66,6 +68,43 @@ public class UltimateQATest extends PageSetUp {
 
         buttonSuccess = driver.findElement(By.id("et_pb_contact_form_0"));
         Assertions.assertEquals( "Thanks for contacting us", buttonSuccess.getText());
+    }
+    @Test
+    public void testThree() {
+
+        //róźnica pomiędzy List, a ArrayList
+        List<String> listOfCars = new ArrayList<>();
+        // skrót Ctrl + D - kopiowanie linii
+        listOfCars.add("volvo");
+        listOfCars.add("saab");
+        listOfCars.add("opel");
+        listOfCars.add("audi");
+
+        // xpath wyszukiwanie po tekscie:  //div[text()='Select an option and validate that it is selected']
+        WebElement dropdown = driver.findElement(By.xpath("//div[text()='Select an option and validate that it is selected']"));
+
+        for(int i = 0 ; i < listOfCars.size(); i++) {
+            dropdown.click();
+
+            WebElement dropdownOption = driver.findElement(By.xpath("//option[@value='" + listOfCars.get(i) +"']"));
+            dropdownOption.click();
+            // import static Assertions
+            Assertions.assertTrue(dropdownOption.isSelected());
+            Assertions.assertEquals(listOfCars.get(i), dropdownOption.getText().toLowerCase());
+        }
+
+        //równoważne:
+
+        for (String listOfCar : listOfCars) {
+            dropdown.click();
+
+            WebElement dropdownOption = driver.findElement(By.xpath("//option[@value='" + listOfCar + "']"));
+            dropdownOption.click();
+            // import static Assertions
+            Assertions.assertTrue(dropdownOption.isSelected());
+            Assertions.assertEquals(listOfCar, dropdownOption.getText().toLowerCase());
+        }
+        }
     }
 
 
