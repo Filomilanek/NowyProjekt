@@ -70,11 +70,9 @@ public class UltimateQATest extends PageSetUp {
         Assertions.assertEquals( "Thanks for contacting us", buttonSuccess.getText());
     }
     @Test
-    public void testThree() {
-
-        //róźnica pomiędzy List, a ArrayList
+    public void testFive() {
+        
         List<String> listOfCars = new ArrayList<>();
-        // skrót Ctrl + D - kopiowanie linii
         listOfCars.add("volvo");
         listOfCars.add("saab");
         listOfCars.add("opel");
@@ -88,24 +86,8 @@ public class UltimateQATest extends PageSetUp {
 
             WebElement dropdownOption = driver.findElement(By.xpath("//option[@value='" + listOfCars.get(i) +"']"));
             dropdownOption.click();
-            // import static Assertions
             Assertions.assertTrue(dropdownOption.isSelected());
             Assertions.assertEquals(listOfCars.get(i), dropdownOption.getText().toLowerCase());
         }
-
-        //równoważne:
-
-        for (String listOfCar : listOfCars) {
-            dropdown.click();
-
-            WebElement dropdownOption = driver.findElement(By.xpath("//option[@value='" + listOfCar + "']"));
-            dropdownOption.click();
-            // import static Assertions
-            Assertions.assertTrue(dropdownOption.isSelected());
-            Assertions.assertEquals(listOfCar, dropdownOption.getText().toLowerCase());
-        }
         }
     }
-
-
-}
